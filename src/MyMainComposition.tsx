@@ -8,9 +8,9 @@ import {
 	continueRender,
 	Video,
 } from 'remotion';
-import {loadFont} from '@remotion/google-fonts/Poppins';
+import {loadFont} from '@remotion/google-fonts/ArchivoBlack';
 import './Styles.css';
-const {fontFamily} = loadFont('normal', {weights: ['400', '100']});
+const {fontFamily} = loadFont('normal');
 import {useState, useCallback, useEffect} from 'react';
 import {createClient} from 'pexels';
 
@@ -35,7 +35,7 @@ export const MyMainComposition: React.FC = () => {
 		const client = '563492ad6f91700001000001491ff09e5b194ec5bbf3c33fc9c4edb1';
 
 		const Videodata = await fetch(
-			`https://api.pexels.com/videos/search?query=surf&per_page=1`,
+			`https://api.pexels.com/videos/search?query=surf&per_page=10`,
 			{
 				method: 'GET',
 				headers: {
@@ -44,8 +44,14 @@ export const MyMainComposition: React.FC = () => {
 			}
 		);
 		const response = await Videodata.json();
-
-		setVideo(String(response['videos'][0]['video_files'][0]['link']));
+		const responseLen = response['videos'].length;
+		setVideo(
+			String(
+				response['videos'][Math.floor(Math.random() * responseLen)][
+					'video_files'
+				][0]['link']
+			)
+		);
 		setQuote(data[randomNumber]['text']);
 		setAuthor(data[randomNumber]['author']);
 		continueRender(handle);
@@ -70,15 +76,16 @@ export const MyMainComposition: React.FC = () => {
 						color: 'black',
 						justifyContent: 'center',
 						alignItems: 'center',
-						fontSize: '10vh',
+						fontSize: '12vh',
 						textAlign: 'center',
-						fontFamily,
+						fontFamily, 
 					}}
 				>
 					<div id="quote">{MyCalledQuote}</div>
 					<div id="author">{MyCalledQuoteAuthor}</div>
 				</AbsoluteFill>
 				<Video
+					volume={0.5}
 					src={
 						MyCalledVideo ||
 						'https://player.vimeo.com/external/342571552.hd.mp4?s=6aa6f164de3812abadff3dde86d19f7a074a8a66&profile_id=175&oauth2_token_id=57447761'
