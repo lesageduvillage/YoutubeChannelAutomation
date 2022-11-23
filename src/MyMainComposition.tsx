@@ -22,8 +22,8 @@ export interface Quote {
 export const MyMainComposition: React.FC = () => {
 	//Get Data from file and transform it into a JSON OBJECT
 	const [MyCalledQuote, setQuote] = useState();
-  const [MyCalledQuoteAuthor, setAuthor] = useState();
-  const [MyCalledVideo, setVideo] = useState();
+	const [MyCalledQuoteAuthor, setAuthor] = useState();
+	const [MyCalledVideo, setVideo] = useState();
 	const [handle] = useState(() => delayRender());
 	const fetchData = useCallback(async () => {
 		//Calling the quote
@@ -32,18 +32,28 @@ export const MyMainComposition: React.FC = () => {
 		const len = data.length;
 		const randomNumber = Math.floor(Math.random() * len);
 		//Lets get the video now
-		const client = createClient(
-			'563492ad6f91700001000001491ff09e5b194ec5bbf3c33fc9c4edb1'
-    );
-    let videoresponse = await client.videos.popular({ per_page: 1 }).then(videos => {setVideo(videos["videos"][0]["video_files"][0]["link"])});
-    setQuote(data[randomNumber]['text']);
-    setAuthor(data[randomNumber]['author']);
+		const client = '563492ad6f91700001000001491ff09e5b194ec5bbf3c33fc9c4edb1';
+
+		const Videodata = await fetch(
+			`https://api.pexels.com/videos/search?query=surf&per_page=1`,
+			{
+				method: 'GET',
+				headers: {
+					Authorization: client, //use the apikey you have generated
+				},
+			}
+		);
+		const response = await Videodata.json();
+
+		setVideo(String(response['videos'][0]['video_files'][0]['link']));
+		setQuote(data[randomNumber]['text']);
+		setAuthor(data[randomNumber]['author']);
 		continueRender(handle);
 	}, [handle]);
 	useEffect(() => {
 		fetchData();
 	}, [fetchData]);
-
+	console.log(MyCalledVideo, 'test');
 	return (
 		<div>
 			<AbsoluteFill
@@ -52,25 +62,29 @@ export const MyMainComposition: React.FC = () => {
 					color: 'black',
 					justifyContent: 'center',
 					alignItems: 'center',
-					fontSize: '10vh',
-					textAlign: 'center',
-					fontFamily,
 				}}
 			>
-				<AbsoluteFill style={{
-					display: 'flex',
-					color: 'white',
-					justifyContent: 'center',
-					alignItems: 'center',
-					fontSize: '10vh',
-					textAlign: 'center',
-					fontFamily,
-				}}>
+				<AbsoluteFill
+					style={{
+						display: 'flex',
+						color: 'black',
+						justifyContent: 'center',
+						alignItems: 'center',
+						fontSize: '10vh',
+						textAlign: 'center',
+						fontFamily,
+					}}
+				>
 					<div id="quote">{MyCalledQuote}</div>
 					<div id="author">{MyCalledQuoteAuthor}</div>
 				</AbsoluteFill>
-
-				<Video src={MyCalledVideo}></Video>
+				<Video
+					src={
+						MyCalledVideo ||
+						'https://player.vimeo.com/external/342571552.hd.mp4?s=6aa6f164de3812abadff3dde86d19f7a074a8a66&profile_id=175&oauth2_token_id=57447761'
+					}
+					style={{width: '3820px'}}
+				></Video>
 			</AbsoluteFill>
 		</div>
 	);
