@@ -14,13 +14,15 @@ const {fontFamily} = loadFont('normal');
 import {useState, useCallback, useEffect} from 'react';
 import {createClient} from 'pexels';
 
-export interface Quote {
-	Quote?: string;
-	Author?: string;
-	Video1?: string;
-}
+export type CompProps = {
+	Quote: string;
+	Author: string;
+	Video: string;
+};
 
-export const MyMainComposition: React.FC<Quote> = ({Quote, Author, Video1}) => {
+export const MyVideo: React.FC<CompProps> = ({Quote, Author, Video}) => {
+  console.log(Quote, 'in video');
+  console.log(Author, 'in video');
 	return (
 		<div>
 			<AbsoluteFill
@@ -37,9 +39,9 @@ export const MyMainComposition: React.FC<Quote> = ({Quote, Author, Video1}) => {
 						color: 'black',
 						justifyContent: 'center',
 						alignItems: 'center',
-						fontSize: '10vh',
+						fontSize: '12vh',
 						textAlign: 'center',
-						fontFamily, 
+						fontFamily,
 					}}
 				>
 					<div id="quote">{Quote}</div>
@@ -47,8 +49,9 @@ export const MyMainComposition: React.FC<Quote> = ({Quote, Author, Video1}) => {
 				</AbsoluteFill>
 				<Video
 					volume={0.5}
-					src={  Video1 ||
-					'https://player.vimeo.com/external/342571552.hd.mp4?s=6aa6f164de3812abadff3dde86d19f7a074a8a66&profile_id=175&oauth2_token_id=57447761'
+					src={
+						Video ||
+						'https://player.vimeo.com/external/342571552.hd.mp4?s=6aa6f164de3812abadff3dde86d19f7a074a8a66&profile_id=175&oauth2_token_id=57447761'
 					}
 					style={{width: '3820px'}}
 				></Video>
