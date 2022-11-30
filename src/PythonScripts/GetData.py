@@ -24,7 +24,12 @@ def get_random_video_from_pixabay():
     Json = response.json()
 
     # Here the index of the video is chosen randomly
-    index = random.randint(0, len(Json['hits']) - 1)
+    # We create a list with index of videos that are longer than 20 seconds and we will pick a random index from that list
+    index_list = []
+    for i in range(len(Json['hits'])):
+        if Json['hits'][i]['duration'] > 20:
+            index_list.append(i)
+    index = random.choice(index_list)
     Url = Json['hits'][index]['videos']['large']['url']
 
     # Download the video to the current directory

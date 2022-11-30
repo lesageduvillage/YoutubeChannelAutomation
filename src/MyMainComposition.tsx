@@ -7,11 +7,12 @@ import {
 	delayRender,
 	continueRender,
 	Video,
+	Audio,
 	staticFile,
 } from 'remotion';
-import {loadFont} from '@remotion/google-fonts/ArchivoBlack';
+import {loadFont} from '@remotion/google-fonts/Poppins';
 import './Styles.css';
-const {fontFamily} = loadFont('normal');
+const {fontFamily} = loadFont('normal', {weights: ['300', '500']});
 import {useState, useCallback, useEffect} from 'react';
 import {createClient} from 'pexels';
 
@@ -32,25 +33,30 @@ export const MyMainComposition: React.FC<Quote> = ({Quote, Author, Video1}) => {
 					alignItems: 'center',
 				}}
 			>
+				<Video id='Video'
+					volume={0.5}
+					src={staticFile('video.mp4')}
+					style={{width: '3820px', opacity: '0.7'}}
+				></Video>
 				<AbsoluteFill
 					style={{
 						display: 'flex',
-						color: 'black',
+						color: 'white',
 						justifyContent: 'center',
 						alignItems: 'center',
-						fontSize: '12vh',
 						textAlign: 'center',
 						fontFamily,
+						fontSize: '3vh',
+						opacity: '1',
+						textShadow: '10px 10px 20px black, 0 0 50px blue, 0 0 30px darkblue'
 					}}
 				>
 					<div id="quote">{Quote}</div>
+					<br></br>
 					<div id="author">{Author}</div>
 				</AbsoluteFill>
-				<Video
-					volume={0.5}
-					src={staticFile('video.mp4')}
-					style={{width: '3820px'}}
-				></Video>
+					<Audio src={staticFile('music.mp3')} startFrom={252} />
+				
 			</AbsoluteFill>
 		</div>
 	);
