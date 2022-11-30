@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "My Remotion video",
   "scripts": {
+    "python": "C:\\Users\\hsargers\\Anaconda3\\envs\\GetVideo\\python.exe src\\PythonScripts\\GetData.py",
     "start": "remotion preview",
     "build": "remotion render MyMainComp out/video.mp4",
     "upgrade": "remotion upgrade",
