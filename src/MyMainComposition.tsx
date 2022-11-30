@@ -36,7 +36,7 @@ export const MyMainComposition: React.FC<Quote> = ({Quote, Author, Video1}) => {
 				<Video id='Video'
 					volume={0.5}
 					src={staticFile('video.mp4')}
-					style={{width: '3820px', opacity: '0.7'}}
+					style={{width: '3820px', opacity: '0.7', filter: 'blur(8px)'}}
 				></Video>
 				<AbsoluteFill
 					style={{
@@ -46,7 +46,7 @@ export const MyMainComposition: React.FC<Quote> = ({Quote, Author, Video1}) => {
 						alignItems: 'center',
 						textAlign: 'center',
 						fontFamily,
-						fontSize: '3vh',
+						fontSize: '70px',
 						opacity: '1',
 						textShadow: '10px 10px 20px black, 0 0 50px blue, 0 0 30px darkblue'
 					}}
