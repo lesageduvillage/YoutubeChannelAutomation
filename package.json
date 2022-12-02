@@ -20,13 +20,13 @@
     "typescript": "^4.6.3"
   },
   "dependencies": {
-    "@remotion/cli": "3.3.3",
-    "@remotion/google-fonts": "3.3.3",
+    "@remotion/cli": "3.3.6",
+    "@remotion/google-fonts": "3.3.6",
     "axios": "^1.2.0",
     "fs": "^0.0.1-security",
     "pexels": "^1.4.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "remotion": "3.3.3"
+    "remotion": "3.3.6"
   }
 }

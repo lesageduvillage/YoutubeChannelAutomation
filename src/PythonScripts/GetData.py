@@ -18,7 +18,7 @@ def get_random_video_from_pexels():
 # PixaBay api call to get random popular video
 def get_random_video_from_pixabay():
     # To change the theme of the video, change the keyword at the end of the url
-    url = 'https://pixabay.com/api/videos/?key=31722829-cfc0478a353e311f83b8bcc56&q=landscape'
+    url = 'https://pixabay.com/api/videos/?key=31722829-cfc0478a353e311f83b8bcc56&q=sunset'
     response = requests.get(url)
     # Dump the response to a json file
     Json = response.json()
@@ -30,7 +30,7 @@ def get_random_video_from_pixabay():
         if Json['hits'][i]['duration'] > 20:
             index_list.append(i)
     index = random.choice(index_list)
-    Url = Json['hits'][index]['videos']['large']['url']
+    Url = Json['hits'][index]['videos']['medium']['url']
 
     # Download the video to the current directory
     r = requests.get(Url, allow_redirects=True)
